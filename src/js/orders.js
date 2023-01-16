@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const name = document.querySelector('.header__role');
   const email = document.querySelector('.header__email');
   const more = document.querySelector('.orders__more');
+  const select = document.querySelector('.orders__sort');
 
   name.textContent = JSON.parse(localStorage.getItem('auth')).name;
   email.textContent = JSON.parse(localStorage.getItem('auth')).email;
@@ -17,10 +18,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const content = document.querySelector('.orders__content');
 
   let orders = [];
+  let sortedOrders = [];
 
   let count = 5;
 
-  function handlerData(responseData) {
+  function handlerData(responseData, orders) {
     responseData.orders.map((order, index) => {
       if (index + 1 > count) {
         return responseData;
@@ -45,19 +47,19 @@ document.addEventListener('DOMContentLoaded', () => {
       date.textContent = order.date;
       date.classList.add('orders__date');
 
-      orders.push(item);
-
       item.append(id, email, sum, date);
-
-      content.append(item);
+      orders.push(item);
     })
+    for (let order of orders) {
+      content.append(order);
+    }
     if (orders.length === responseData.orders.length) {
       more.style = 'display: none';
     }
-    return responseData;
+    return orders;
   }
 
-  function getData() {
+  function getData(orders) {
     fetch('data/FrontendTest.json', {
         headers: {
           'Content-Type': 'application/json',
@@ -67,18 +69,40 @@ document.addEventListener('DOMContentLoaded', () => {
     )
       .then(response => response.json())
       .then((responseData) => {
-        handlerData(responseData);
+        handlerData(responseData, orders);
       })
   }
 
-  getData();
+  getData(orders);
 
-  more.addEventListener('click', () => {
+  function deleteContent() {
     document.querySelectorAll('.orders__item--main').forEach((e) => {
       e.remove();
     });
+  }
+
+  function clearOrders() {
     orders = [];
+  }
+  console.log(orders)
+  more.addEventListener('click', () => {
+    deleteContent();
+    clearOrders();
     count += 5;
-    getData();
+    getData(orders);
+  })
+
+  select.addEventListener('change', () => {
+    deleteContent();
+    if (select.value === 'order') {
+      clearOrders();
+      getData(orders);
+    } else if (select.value === 'email') {
+      clearOrders();
+    } else if (select.value === 'sum') {
+      clearOrders();
+    } else if (select.value === 'date') {
+      clearOrders();
+    };
   })
 });

@@ -42,7 +42,8 @@ const fonts = (done) => {
 
 const data = () => {
   return src('src/data/**/*.json')
-    .pipe(dest('dist/data'));
+    .pipe(dest('dist/data'))
+    .pipe(browserSync.stream())
 }
 
 const preproc = () => {

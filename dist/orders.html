@@ -11,38 +11,42 @@
 </head>
 <body>
   <header class="header">
-    <div class="container header__container">
-      <div class="header__user">
-        <div class="header__logo"></div>
-        <div class="header__data">
-          <span class="header__role"></span>
-          <span class="header__email"></span>
+    <div class="container">
+      <div class="header__container">
+        <div class="header__user">
+          <div class="header__logo"></div>
+          <div class="header__data">
+            <span class="header__role"></span>
+            <span class="header__email"></span>
+          </div>
         </div>
+        <button class="header__exit">Выход</button>
       </div>
-      <button class="header__exit">Выход</button>
     </div>
   </header>
   <main class="main">
     <section class="orders">
-      <div class="container orders__container">
-        <div class="orders__head">
-          <h2 class="orders__title">Заказы</h2>
-          <select class="orders__sort">
-            <option value="order">По номеру заказа</option>
-            <option value="email">По email</option>
-            <option value="sum">По сумме</option>
-            <option value="date">По дате</option>
-          </select>
+      <div class="container">
+        <div class="orders__container">
+          <div class="orders__head">
+            <h2 class="orders__title">Заказы</h2>
+            <select class="orders__sort">
+              <option value="order">По номеру заказа</option>
+              <option value="email">По email</option>
+              <option value="sum">По сумме</option>
+              <option value="date">По дате</option>
+            </select>
+          </div>
+          <ul class="orders__content">
+            <li class="orders__item">
+              <span class="orders__heading orders__id">Номер заказа</span>
+              <span class="orders__heading orders__email">Email</span>
+              <span class="orders__heading orders__sum">Сумма</span>
+              <span class="orders__heading orders__date">Дата</span>
+            </li>
+          </ul>
+          <button class="orders__more">Показать ещё...</button>
         </div>
-        <ul class="orders__content">
-          <li class="orders__item orders__item--main">
-            <span class="orders__heading orders__id">Номер заказа</span>
-            <span class="orders__heading orders__email">Email</span>
-            <span class="orders__heading orders__sum">Сумма</span>
-            <span class="orders__heading orders__date">Дата</span>
-          </li>
-        </ul>
-        <button class="orders__more">Показать ещё...</button>
       </div>
     </section>
   </main>
