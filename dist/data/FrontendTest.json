@@ -26,15 +26,15 @@
         },
         {
             "id": 3,
-            "email": "client3@example.comaa",
+            "email": "client3@example.com",
             "amount": 800,
             "date": "2022-05-16"
         },
         {
             "id": 4,
-            "email": "Aclient4@example.com",
+            "email": "client4@example.com",
             "amount": 120,
-            "date": "2022-05-20"
+            "date": "2021-05-20"
         },
         {
             "id": 5,
@@ -68,13 +68,13 @@
         },
         {
             "id": 10,
-            "email": "client10@example.com",
+            "email": "Aclient10@example.com",
             "amount": 100,
             "date": "2022-06-12"
         },
         {
             "id": 11,
-            "email": "client11@example.com",
+            "email": "Bclient11@example.com",
             "amount": 150,
             "date": "2022-06-15"
         },

@@ -4,25 +4,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const email = document.querySelector('.header__email');
   const more = document.querySelector('.orders__more');
   const select = document.querySelector('.orders__sort');
+  const content = document.querySelector('.orders__content');
+  const exit = document.querySelector('.header__exit');
 
   name.textContent = JSON.parse(localStorage.getItem('auth')).name;
   email.textContent = JSON.parse(localStorage.getItem('auth')).email;
-
-  const exit = document.querySelector('.header__exit');
 
   exit.addEventListener('click', () => {
     localStorage.setItem('auth', JSON.stringify(false));
     window.location = 'index.html';
   });
 
-  const content = document.querySelector('.orders__content');
-
   let orders = [];
   let sortedOrders = [];
 
   let count = 5;
 
-  function handlerData(responseData, orders) {
+  function handlerData(responseData, data) {
     responseData.orders.map((order, index) => {
       if (index + 1 > count) {
         return responseData;
@@ -50,13 +48,13 @@ document.addEventListener('DOMContentLoaded', () => {
       item.append(id, email, sum, date);
       orders.push(item);
     })
-    for (let order of orders) {
+    for (let order of data) {
       content.append(order);
     }
     if (orders.length === responseData.orders.length) {
       more.style = 'display: none';
     }
-    return orders;
+    return data;
   }
 
   function getData(orders) {
@@ -84,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function clearOrders() {
     orders = [];
   }
-  console.log(orders)
+
   more.addEventListener('click', () => {
     deleteContent();
     clearOrders();
@@ -98,11 +96,17 @@ document.addEventListener('DOMContentLoaded', () => {
       clearOrders();
       getData(orders);
     } else if (select.value === 'email') {
+      sortedOrders = orders.sort((a, b) => a.children[1].textContent > b.children[1].textContent ? 1 : -1);
       clearOrders();
+      getData(sortedOrders);
     } else if (select.value === 'sum') {
+      sortedOrders = orders.sort((a, b) => +a.children[2].textContent - +b.children[2].textContent);
       clearOrders();
+      getData(sortedOrders);
     } else if (select.value === 'date') {
+      sortedOrders = orders.sort((a, b) => Date.parse(a.children[3].textContent) - Date.parse(b.children[3].textContent));
       clearOrders();
+      getData(sortedOrders);
     };
   })
 });
